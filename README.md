@@ -17,4 +17,33 @@ npm run dev
 ```
 #### 2. Buka localhost:5000
 
+## Mengembangkan Sebagai Frontend
+
+#### Rekomendasi
+* [Mengerti Template Engine](https://www.youtube.com/watch?v=1srD3Mdvf50)
+
+#### Untuk menambahkan file html dinamis
+```bash
+cd gg-team
+cd views
+```
+Untuk VSCode
+
+```bash
+code namafiledinamis.handlebars
+```
+
+#### Untuk menambahkan file html statis
+```bash
+cd gg-team
+cd public
+```
+
+```bash
+code namafilestatis.html
+code namafilestatis.css
+```
+
+
+
 
