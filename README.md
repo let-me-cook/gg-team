@@ -10,7 +10,7 @@ Final Project Kelas Pemrogramman Web
 
 #### 1. Clone repo dan install dependensi
 ```bash
-https://github.com/alfa-th/gg-team
+git clone https://github.com/alfa-th/gg-team
 cd gg-team
 npm i
 npm run dev
