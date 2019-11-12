@@ -1,0 +1,32 @@
+<h1 class="text-center mb-3">{{title}}</h1>
+
+<form action="/api/gamers" method="POST" class="mb-4">
+  <div class="form-group">
+    <label for="uname">Username</label>
+    <input type="text" name="uname" class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input type="email" name="email" class="form-control">
+  </div>
+  <label for="game">Game</label>
+  <div class="custom-control custom-checkbox">
+    <input type="checkbox" class="custom-control-input" id="dota2" name="game" value="dota2">
+    <label class="custom-control-label" for="dota2">DOTA 2</label>
+  </div>
+  <div class="custom-control custom-checkbox">
+    <input type="checkbox" class="custom-control-input" id="csgo" name="game" value="csgo">
+    <label class="custom-control-label" for="csgo">CSGO</label>
+  </div>
+  <br>
+  <input type="submit" value="Add Member" class="btn btn-primary btn-block">
+</form>
+
+<h4>Gamers</h4>
+<ul class="list-group">
+  {{#each gamers}}
+  <li class="list-group-item">{{this.uname}}: {{this.game}}</li>
+  {{/each}}
+</ul>
+
+<a href="/api/gamers" class="btn btn-light mt-4">Visit API</a>
