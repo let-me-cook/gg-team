@@ -21,6 +21,9 @@ npm run dev
 
 #### Rekomendasi
 * [Mengerti Template Engine](https://www.youtube.com/watch?v=1srD3Mdvf50)
+* [Mengerti Node JS dan Express](https://www.youtube.com/watch?v=D7lpojnH10s)
+* [Mengerti Protokol HTTP (English)](https://www.youtube.com/watch?v=iYM2zFP3Zn0)
+
 
 #### Untuk menambahkan file html dinamis
 ```bash
