@@ -17,13 +17,20 @@ h1 {
 }
 
 .wrapper {
-  display: flex;
+  display: none;
   align-items: center;
   flex-direction: column; 
   justify-content: center;
   width: 100%;
   min-height: 100%;
   padding: 20px;
+  position: fixed;
+}
+
+#closeit {
+
+	padding: 3px 3px;
+
 }
 
 #formContent {
