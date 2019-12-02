@@ -24,8 +24,7 @@
 					<a class="nav-link" href="#">FAQ</a>
 				</li>
 				<li class="nav-item active">
-					<a class="nav-link" >Login</a>
-					<button onclick="openForm()">login</button>
+					<a class="nav-link" onclick="openForm()">Login</a>
 				</li>
 			</ul>
 		</nav>
@@ -35,7 +34,7 @@
 		<button id="closeit" onclick="closeForm()">X</button>
 		<form action="/action_page.php">
 			<input type="text" name="username" placeholder="Username">
-			<input type="text" name="pass" placeholder="Password">
+			<input type="Password" name="pass" placeholder="Password">
 			<input type="submit" value="Login">
 		</form>
 	</div>
@@ -86,7 +85,7 @@
 			</li>
 			<div class="signup-circle">
 				<li class="list-inline-item">
-					<a href="#!" class="btn btn-outline-white btn-rounded" style="color: white;">Sign up!</a>
+					<a href="register.php" class="btn btn-outline-white btn-rounded" style="color: white;">Sign up!</a>
 				</li>
 			</div>
 		</ul>
@@ -106,7 +105,7 @@
 <script src="js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">	</script>
 <script>
 	function openForm() {
-		document.getElementById("loginform").style.display = "block";
+		document.getElementById("loginform").style.display = "flex";
 	}
 
 	function closeForm() {
