@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const gamers = require("../../GamersData"); 
+const gamers = require("../../models/GamersData"); 
 
 // Get All gamers
 router.get("/", (req, res) => {

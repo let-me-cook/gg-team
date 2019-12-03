@@ -2,9 +2,18 @@ const express = require("express");
 const path = require("path");
 const exphbs = require("express-handlebars");
 const logger = require("./middleware/logger");
-const gamers = require('./GamersData')
+const gamers = require('./models/GamersData');
+const mongoose = require("mongoose");
+
 
 const app = express();
+
+const db = require("./config/keys.js").MongoURI;
+mongoose
+  .connect(db, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
+  .then(() => console.log("Koneksi database sukses"))
+  .catch(err => console.log(err));
+
 
 // Serve Logger Middleware
 //app.use(logger);
