@@ -40,7 +40,7 @@
 				</div> <!-- form-group// -->
 				<div class="form-group input-group">
 					<div class="input-group-prepend">
-						<span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+						<span class="input-group-text"> <i class="fa fa-key"></i> </span>
 					</div>
 					<input class="form-control" placeholder="Create password" type="password">
 				</div> <!-- form-group// -->
@@ -60,12 +60,7 @@
 					<div class="input-group-prepend">
 						<span class="input-group-text"> <i class="fa fa-phone"></i> </span>
 					</div>
-					<select class="custom-select" style="max-width: 120px;">
-						<option selected="">+971</option>
-						<option value="1">+972</option>
-						<option value="2">+198</option>
-						<option value="3">+701</option>
-					</select>
+					
 					<input name="" class="form-control" placeholder="Phone number" type="text">
 				</div> <!-- form-group// -->
 				<div class="form-group">
@@ -80,13 +75,3 @@
 <!--container end.//-->
 
 <br><br>
-<article class="bg-secondary mb-3">  
-	<div class="card-body text-center">
-		<h3 class="text-white mt-3">Bootstrap 4 UI KIT</h3>
-		<p class="h5 text-white">Components and templates  <br> for Ecommerce, marketplace, booking websites 
-		and product landing pages</p>   <br>
-		<p><a class="btn btn-warning" target="_blank" href="http://bootstrap-ecommerce.com/"> Bootstrap-ecommerce.com  
-			<i class="fa fa-window-restore "></i></a></p>
-		</div>
-		<br><br>
-	</article>
