@@ -27,7 +27,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use("/api/gamers", require("./routes/api/gamers"));
 app.use("/", require("./routes/index"));
 
-const PORT = process.env.PORT | 5000;
+const PORT = process.env.PORT || 5000;
 
 // Serve Static Folder
 app.use(express.static(path.join(__dirname, "public")));
