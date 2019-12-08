@@ -1,4 +1,6 @@
 const Schema = require("mongoose").Schema;
+const mongoose = require("mongoose");
+const autoIncrement = require("mongoose-auto-increment")
 
 var gamersToGameSchema = new Schema({
   id: {
@@ -39,8 +41,7 @@ var gamersToTeamSchema = new Schema({
 
 var gamersSchema = new Schema({
   id: {
-    type: Number,
-    required: true
+    type: String
   },
   uname: {
     type: String,
@@ -55,13 +56,15 @@ var gamersSchema = new Schema({
     required: true
   },
   games: [gamersToGameSchema],
-  teams: [gamersToGameSchema],
+  teams: [gamersToTeamSchema],
   date_created: {
     type: Date,
     default: Date.now()
   }
 });
 
-const Gamers = mongoose.model("Gamers", gamersSchema, "gg-team");
+gamersSchema.plugin(autoIncrement.plugin, { model: 'Gamers', field: 'id' });
+
+const Gamers = mongoose.model("Gamers", gamersSchema, "gamers");
 
 module.exports = Gamers;

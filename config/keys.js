@@ -1,3 +1,3 @@
 module.exports = {
-  MongoURI: "mongodb+srv://tugas-app:pass{tugas-app}@my-clusters-nbrri.mongodb.net/test?retryWrites=true&w=majority"
+  MongoURI: "mongodb+srv://gg-team-rw:pass{gg-team-rw}@gg-team-qfdkx.mongodb.net/gg-team?retryWrites=true&w=majority",
 }
