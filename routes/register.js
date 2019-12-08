@@ -25,7 +25,7 @@ router.post("/", (req, res) => {
         req.body.password2
       )
     ) {
-      errors.push("Email, Username, Password tidak boleh kosong");
+      errors.push("Email, Username, atau Password tidak boleh kosong");
 
       return res.render("register", {
         errors
@@ -37,10 +37,13 @@ router.post("/", (req, res) => {
       (err, docs) => {
         if (err) throw err;
 
-        if (docs.email === req.body.email)
-          errors.push("Email sudah diregistrasikan");
-        if (docs.uname === req.body.uname)
-          errors.push("Username sudah diregistrasikan");
+        if (docs) {
+          if (docs.email === req.body.email)
+            errors.push("Email sudah diregistrasikan");
+          if (docs.uname === req.body.uname)
+            errors.push("Username sudah diregistrasikan");
+        }
+
         if (req.body.password !== req.body.password2)
           errors.push("Password tidak sama");
 
