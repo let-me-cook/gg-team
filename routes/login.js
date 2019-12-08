@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const gamers = require("../models/Gamers")
-
+const Gamers = require("../models/Gamers");
+const bcrypt = require("bcrypt")
 
 router.get("/", (req, res) => {
-  if (req.session.authorized) {
+  if (req.session.isAuthenticated) {
     return res.redirect("dashboard");
   } else {
     return res.render("login");
@@ -12,37 +12,33 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-  if (req.session.authorized) {
-    // Mahasiswa.countDocuments({}, (err, documentCount) => {
-    //   new Mahasiswa({
-    //     id: documentCount + 1,
-    //     nama: req.body.name,
-    //     email: req.body.email,
-    //     password: req.body.password,
-    //     kelas: req.body.kelas
-    //   }).save((err, product) => {
-    //     if (err) throw err;
+  errors = [];
 
-    //     return res.redirect("/dosen");
-    //   });
-    // });
-  } else {
+  Gamers.findOne({ email: req.body.email }).then(gamer => {
+    if (!gamer) {
+      errors.push("Email atau Password salah");
+      res.render("login", {
+        errors
+      });
+    } else {
+      bcrypt.compare(req.body.password, gamer.password, (err, isMatch) => {
+        if (err) throw err;
 
-    console.log(req.body);
-    // Dosen.findOne({ email: req.body.email }, (err, docs) => {
-    //   if (err) throw err;
+        if (isMatch) {
+          req.session.uname = gamer.uname;
+          req.session.isAuthenticated = true;
 
-    //   if (!docs || docs.password != req.body.password) {
-    //     return res.render("login");
-    //   }
+          return res.redirect("/dashboard");
+        } else {
+          errors.push("Email atau Password salah");
 
-    //   req.session.authorized = true;
-    //   req.session.idDosen = docs.id;
-    //   req.session.namaDosen = docs.nama;
-
-    //   return res.redirect("/dosen");
-    // });
-  }
+          res.render("login", {
+            errors
+          });
+        }
+      });
+    }
+  });
 });
 
 module.exports = router;

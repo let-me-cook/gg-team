@@ -48,6 +48,7 @@ app.use("/api/gamers", require("./routes/api/gamers.js"));
 app.use("/", require("./routes/index.js"));
 app.use("/login", require("./routes/login.js"));
 app.use("/register", require("./routes/register.js"));
+app.use("/dashboard", require("./routes/dashboard.js"))
 
 const PORT = process.env.PORT || 5000;
 
