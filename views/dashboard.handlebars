@@ -1,51 +1,55 @@
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-  <a class="navbar-brand" href="/">
-    <img src="img/logowhite.png" alt="logo">
-  </a>
-  <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+<body>
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <a class="navbar-brand" href="/">
+      <img src="img/logowhite.png" alt="logo">
+    </a>
+    <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button> -->
-  <!-- <div class="collapse navbar-collapse" id="navbarNav"> -->
-  <ul class="navbar-nav">
-    <li class="nav-item active">
-      <a class="nav-link" href="#">Find Team</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Dashboard</a>
-    </li>
-  </ul>
-  <!-- </div> -->
-</nav>
-<br><br><br><br>
-{{#if username}}
-<center><h3>SALAM SEJAHTERA {{username}}</h3></center>
-{{/if}}
-<div class="container text-center border border-white text-white bg-dark">
-  <div class="row">
-    <div class="col-2">
-      Context
-    </div>
-    <div class="col-5">
-      1 of 2
-    </div>
-    <div class="col-5">
-      2 of 2
-    </div>
-  </div>
-</div>
-<br><br>
-<div class="container text-center border border-white text-white bg-dark">
-  <div class="row">
-    <div class="col-4">
-      PlayerInfo
-    </div>
-    <div class="col-8">
-      TeamMessage
+    <!-- <div class="collapse navbar-collapse" id="navbarNav"> -->
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="dashboard/findteam">Find Team</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Dashboard</a>
+      </li>
+    </ul>
+    <!-- </div> -->
+  </nav>
+  <br><br><br><br>
+  {{#if username}}
+  <center>
+    <h3>SALAM SEJAHTERA {{username}}</h3>
+  </center>
+  {{/if}}
+  <div class="container text-center border border-white text-white bg-dark">
+    <div class="row">
+      <div class="col-2">
+        Context
+      </div>
+      <div class="col-5">
+        1 of 2
+      </div>
+      <div class="col-5">
+        2 of 2
+      </div>
     </div>
   </div>
-</div>
-<br><br>
-<div class="container text-center border border-white text-white bg-dark">
-  <br>
-  <p>Ini Nanti Tempat Kalender</p>
-</div>
+  <br><br>
+  <div class="container text-center border border-white text-white bg-dark">
+    <div class="row">
+      <div class="col-4">
+        PlayerInfo
+      </div>
+      <div class="col-8">
+        TeamMessage
+      </div>
+    </div>
+  </div>
+  <br><br>
+  <div class="container text-center border border-white text-white bg-dark">
+    <br>
+    <p>Ini Nanti Tempat Kalender</p>
+  </div>
+</body>

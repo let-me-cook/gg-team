@@ -1,43 +1,8 @@
 const Schema = require("mongoose").Schema;
 const mongoose = require("mongoose");
-const autoIncrement = require("mongoose-auto-increment")
-
-var gamersToGameSchema = new Schema({
-  id: {
-    type: Schema.Types.ObjectId,
-    required: true
-  },
-  name: {
-    type: String,
-    required: true
-  },
-  stats: {
-    playerId: {
-      type: String,
-      required: false
-    },
-    relevantRank: {
-      type: String,
-      required: false
-    }
-  }
-});
-
-var gamersToTeamSchema = new Schema({
-  id: {
-    type: Schema.Types.ObjectId,
-    required: true
-  },
-  name: {
-    type: String,
-    required: true
-  },
-  tipe: {
-    type: String,
-    enum: ["Casual", "Ranked", "Professional"],
-    required: true
-  }
-});
+const autoIncrement = require("mongoose-auto-increment");
+const gamersGameSchema = require("./GamersGameSchema");
+const gamersTeamSchema = require("./GamersTeamSchema");
 
 var gamersSchema = new Schema({
   id: {
@@ -55,15 +20,16 @@ var gamersSchema = new Schema({
     type: String,
     required: true
   },
-  games: [gamersToGameSchema],
-  teams: [gamersToTeamSchema],
+  games: [gamersGameSchema],
+  teams: [gamersTeamSchema],
+  notification: [String],
   date_created: {
     type: Date,
     default: Date.now()
   }
 });
 
-gamersSchema.plugin(autoIncrement.plugin, { model: 'Gamers', field: 'id' });
+gamersSchema.plugin(autoIncrement.plugin, { model: "Gamers", field: "id" });
 
 const Gamers = mongoose.model("Gamers", gamersSchema, "gamers");
 

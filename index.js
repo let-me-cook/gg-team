@@ -4,7 +4,9 @@ const exphbs = require("express-handlebars");
 const mongoose = require("mongoose");
 const session = require("express-session");
 const autoIncrement = require("mongoose-auto-increment");
-
+const MongoStore = require('connect-mongo')(session);
+var flash = require('connect-flash');
+ 
 const app = express();
 
 const db = require("./config/keys.js").MongoURI;
@@ -21,6 +23,9 @@ autoIncrement.initialize(mongoose);
 
 app.use(
   session({
+    store: new MongoStore({
+      mongooseConnection: mongoose.connection
+    }),
     name: "sid",
     secret: "kunci rahasia sesi",
     resave: false,
@@ -32,6 +37,8 @@ app.use(
     }
   })
 );
+
+app.use(express.cookieParser('kunci rahasia flash'));
 // Serve Logger Middleware
 //app.use(logger);
 
@@ -48,7 +55,7 @@ app.use("/api/gamers", require("./routes/api/gamers.js"));
 app.use("/", require("./routes/index.js"));
 app.use("/login", require("./routes/login.js"));
 app.use("/register", require("./routes/register.js"));
-app.use("/dashboard", require("./routes/dashboard.js"))
+app.use("/dashboard", require("./routes/dashboard.js"));
 
 const PORT = process.env.PORT || 5000;
 

@@ -1,26 +1,49 @@
-<div class="row mt-5">
-  <div class="col-md-6 m-auto">
-    <div class="card card-body">
-      <h1 class="text-center mb-3">Login</h1>
-      {{#if errors}}
-      {{#each errors}}
-      <div class="alert alert-primary" role="alert">
-        {{this}}
+<body style="background-color: #737373">
+  <div class="container-fluid">
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+      <ul class="navbar-nav mr-auto">
+        <a class="navbar-brand" href="/">
+          <img src="img/logowhite.png" alt="logo">
+        </a>
+      </ul>
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="/about">About</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="/faq">FAQ</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="/login">Login</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="row mt-5">
+    <div class="col-md-6 m-auto">
+      <div class="card card-body">
+        <h1 class="text-center mb-3">Login</h1>
+        {{#if errors}}
+        {{#each errors}}
+        <div class="alert alert-primary" role="alert">
+          {{this}}
+        </div>
+        {{/each}}
+        {{/if}}
+        <form action="./login" method="POST">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" class="form-control" placeholder="Enter Email" />
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="text" id="password" name="password" class="form-control" placeholder="Enter Password"
+              minlength="5" />
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Login</button>
+        </form>
       </div>
-      {{/each}}
-      {{/if}}
-      <form action="./login" method="POST">
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" class="form-control" placeholder="Enter Email" />
-        </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input type="text" id="password" name="password" class="form-control" placeholder="Enter Password"
-            minlength="5" />
-        </div>
-        <button type="submit" class="btn btn-primary btn-block">Login</button>
-      </form>
     </div>
   </div>
-</div>
+</body>

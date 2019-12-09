@@ -13,4 +13,12 @@ router.get("/", (req, res) => {
   }
 });
 
+router.get("/findteam", (req, res) => {
+  if(req.session.isAuthenticated) {
+    return res.render("findteam");
+  } else {
+    return res.redirect("login");
+  }
+})
+
 module.exports = router;
