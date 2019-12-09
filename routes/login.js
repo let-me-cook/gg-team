@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Gamers = require("../models/Gamers");
-const bcrypt = require("bcrypt")
+const bcrypt = require("bcryptjs");
 
 router.get("/", (req, res) => {
   if (req.session.isAuthenticated) {

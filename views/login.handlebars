@@ -1,3 +1,15 @@
+<style>
+    body {
+      font-family: 'Montserrat';
+      padding-right: 0px;
+      padding-left: 0px;
+    }
+
+    h1 {
+      font-size: 70px;
+    }
+  </style>
+
 <body style="background-color: #737373">
   <div class="container-fluid">
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
@@ -16,6 +28,12 @@
         <li class="nav-item active">
           <a class="nav-link" href="/login">Login</a>
         </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="/dashboard">DEBUG-DASHBOARD</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="/register">DEBUG-REGISTER</a>
+        </li>
       </ul>
     </nav>
   </div>
@@ -23,7 +41,7 @@
   <div class="row mt-5">
     <div class="col-md-6 m-auto">
       <div class="card card-body">
-        <h1 class="text-center mb-3">Login</h1>
+        <h1 class="text-center mb-3 font-weight-bold">Login</h1>
         {{#if errors}}
         {{#each errors}}
         <div class="alert alert-primary" role="alert">
