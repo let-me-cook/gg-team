@@ -1,13 +1,13 @@
 const express = require("express");
 const router = express.Router();
 const Gamers = require("../models/Gamers");
-const bcrypt = require("bcrypt")
+const bcrypt = require("bcrypt");
 
 router.get("/", (req, res) => {
   if (req.session.isAuthenticated) {
     return res.redirect("dashboard");
   } else {
-    return res.render("login");
+    return res.render("login", { infos: req.flash("infos") });
   }
 });
 
@@ -18,7 +18,7 @@ router.post("/", (req, res) => {
     if (!gamer) {
       errors.push("Email atau Password salah");
       res.render("login", {
-        errors
+        infos: errors
       });
     } else {
       bcrypt.compare(req.body.password, gamer.password, (err, isMatch) => {
