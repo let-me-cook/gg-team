@@ -27,8 +27,10 @@ router.post("/", (req, res) => {
     ) {
       errors.push("Email, Username, atau Password tidak boleh kosong");
 
+      req.flash("infos", errors);
+
       return res.render("register", {
-        errors
+        infos: req.flash("infos")
       });
     }
 
@@ -48,8 +50,10 @@ router.post("/", (req, res) => {
           errors.push("Password tidak sama");
 
         if (errors.length !== 0) {
+          req.flash("infos", errors);
+
           return res.render("register", {
-            errors
+            infos: req.flash("infos")
           });
         }
 
@@ -69,6 +73,7 @@ router.post("/", (req, res) => {
             }).save((err, product) => {
               if (err) throw err;
 
+              req.flash("infos", "Anda telah sukses registrasi");
               return res.redirect("/login");
             });
           });

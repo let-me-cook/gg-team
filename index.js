@@ -5,9 +5,10 @@ const mongoose = require("mongoose");
 const session = require("express-session");
 const autoIncrement = require("mongoose-auto-increment");
 const MongoStore = require('connect-mongo')(session);
-var flash = require('connect-flash');
+const cookieParser = require("cookie-parser");
+const flash = require('connect-flash');
  
-const app = express();
+var app = express();
 
 const db = require("./config/keys.js").MongoURI;
 mongoose
@@ -21,6 +22,8 @@ mongoose
 
 autoIncrement.initialize(mongoose);
 
+app.use(cookieParser('kunci rahasia sesi'));
+
 app.use(
   session({
     store: new MongoStore({
@@ -28,8 +31,8 @@ app.use(
     }),
     name: "sid",
     secret: "kunci rahasia sesi",
-    resave: false,
-    saveUninitialized: false,
+    resave: true,
+    saveUninitialized: true,
     cookie: {
       secure: false,
       maxAge: 1000 * 60 * 60 * 2,
@@ -38,7 +41,11 @@ app.use(
   })
 );
 
+<<<<<<< HEAD
 // app.use(express.cookieParser('kunci rahasia flash'));
+=======
+app.use(flash());
+>>>>>>> 48c331c63c48f5563825aa5768d929d2f6a98f35
 // Serve Logger Middleware
 //app.use(logger);
 
