@@ -1,7 +1,7 @@
-<body>
+<body style="background-color: #737373">
   <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-    <a class="navbar-brand" href="/">
-      <img src="img/logowhite.png" alt="logo">
+    <a class="navbar-brand" href="/dashboard">
+      <img src="/img/logowhite.png" alt="logo">
     </a>
     <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -17,22 +17,28 @@
     </ul>
     <!-- </div> -->
   </nav>
-  <br><br><br><br>
+  <br><br><br>
   {{#if username}}
   <center>
-    <h3>SALAM SEJAHTERA {{username}}</h3>
+    <h3 class="text-white font-weight-bold">SALAM SEJAHTERA {{username}}</h3>
   </center>
   {{/if}}
-  <div class="container text-center border border-white text-white bg-dark">
+  <br>
+  <div class="container border border-white text-white bg-dark">
     <div class="row">
-      <div class="col-2">
-        Context
+      <div class="col text-center font-weight-bold">
+        <p>GAME</p>
+        <p>LIST</p>
       </div>
-      <div class="col-5">
-        1 of 2
+      <div class="col">
+        <a href="#">
+          <img id="logo-dota"src="/img/dota2.png" alt="dotka2" style="width: 20%;">
+        </a>
       </div>
-      <div class="col-5">
-        2 of 2
+      <div class="col">
+        <a href="#">
+          <img id="logo-pubg"src="/img/pubg.png" alt="pabji" style="width: 20%;">
+        </a>
       </div>
     </div>
   </div>
