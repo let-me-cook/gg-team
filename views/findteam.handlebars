@@ -53,46 +53,26 @@
       </div>
     </div>
 
+    {{#if infos}}
+    <div class="row mt-5 text-center">
+      <div class="col">
+        <div class="alert alert-primary" role="alert">
+          {{infos}}
+        </div>
+      </div>
+    </div>
+    {{else}}
+    {{#each teams}}
     <div class="row mt-5 text-center">
       <div class="col">
         <button type="button" class="btn btn-dark mr-3" onclick="window.location.href='team.php'"
           style="border-radius: 50px; padding: 10px 500px 10px 500px;">
-          <h3>#Team</h3>
+          <h3>{{this}}</h3>
         </button>
       </div>
     </div>
-    <div class="row mt-3 text-center">
-      <div class="col">
-        <button type="button" class="btn btn-dark mr-3" onclick="window.location.href='team.php'"
-          style="border-radius: 50px; padding: 10px 500px 10px 500px;">
-          <h3>#Team</h3>
-        </button>
-      </div>
-    </div>
-    <div class="row mt-3 text-center">
-      <div class="col">
-        <button type="button" class="btn btn-dark mr-3" onclick="window.location.href='team.php'"
-          style="border-radius: 50px; padding: 10px 500px 10px 500px;">
-          <h3>#Team</h3>
-        </button>
-      </div>
-    </div>
-    <div class="row mt-3 text-center">
-      <div class="col">
-        <button type="button" class="btn btn-dark mr-3" onclick="window.location.href='team.php'"
-          style="border-radius: 50px; padding: 10px 500px 10px 500px;">
-          <h3>#Team</h3>
-        </button>
-      </div>
-    </div>
-    <div class="row mt-3 text-center">
-      <div class="col">
-        <button type="button" class="btn btn-dark mr-3" onclick="window.location.href='team.php'"
-          style="border-radius: 50px; padding: 10px 500px 10px 500px;">
-          <h3>#Team</h3>
-        </button>
-      </div>
-    </div>
-  </div>
+    {{/each}}
+    {{/if}}
+
   </div>
 </body>

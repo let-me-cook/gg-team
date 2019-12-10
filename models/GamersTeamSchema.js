@@ -3,7 +3,8 @@ const Schema = require("mongoose").Schema;
 var gamersTeamSchema = new Schema({
   id: {
     type: Schema.Types.ObjectId,
-    required: true
+    required: true,
+    ref: "Games"
   },
   name: {
     type: String,

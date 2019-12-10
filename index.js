@@ -41,11 +41,8 @@ app.use(
   })
 );
 
-<<<<<<< HEAD
 // app.use(express.cookieParser('kunci rahasia flash'));
-=======
 app.use(flash());
->>>>>>> 48c331c63c48f5563825aa5768d929d2f6a98f35
 // Serve Logger Middleware
 //app.use(logger);
 

@@ -1,11 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Gamers = require("../models/Gamers");
-<<<<<<< HEAD
 const bcrypt = require("bcryptjs");
-=======
-const bcrypt = require("bcrypt");
->>>>>>> 48c331c63c48f5563825aa5768d929d2f6a98f35
 
 router.get("/", (req, res) => {
   if (req.session.isAuthenticated) {

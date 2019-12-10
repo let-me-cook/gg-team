@@ -1,9 +1,11 @@
 const Schema = require("mongoose").Schema;
+const Games =  require("./Games");
 
 var gamersGameSchema = new Schema({
   id: {
     type: Schema.Types.ObjectId,
-    required: true
+    required: true,
+    ref: "Games"
   },
   name: {
     type: String,
