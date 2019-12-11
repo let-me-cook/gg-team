@@ -1,0 +1,156 @@
+<body style="background-color: #737373">
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+      <a class="navbar-brand" href="/dashboard">
+        <img src="/img/logowhite.png" alt="logo">
+      </a>
+      <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </button> -->
+      <!-- <div class="collapse navbar-collapse" id="navbarNav"> -->
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="findteam">Find Team</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="../dashboard">Dashboard</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">MyTeams</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Logout</a>
+        </li>
+        {{!-- <li class="nav-item active">
+            <a class="nav-link" href="/faq">FAQ</a>
+          </li> --}}
+      </ul>
+      <!-- </div> -->
+    </nav>
+    {{!-- <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+      <ul class="navbar-nav mr-auto">
+        <a class="navbar-brand" href="/dashboard">
+          <img src="img/logowhite.png" alt="logo">
+        </a>
+        <h4 style="color: white">|</h2>
+        <h4 style="color: white" class="ml-3">Find Team Dashboard</h2>
+      </ul>
+  
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="!#">Notification</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="!#">LogOut</a>
+        </li>
+      </ul>
+    </nav> --}}
+  
+  
+    <div class="container">
+      <div class="row-md-12">
+        <div class="col-md-12 mt-3">
+          <h2 style="text-align: center; color: white">TEAMS</h2>
+        </div>
+      </div>
+      <div class="row">
+        <select class="col mx-1 custom-select" id="gameFilter">
+          <option selected>Games</option>
+          <option value="1">Dota 2</option>
+          <option value="2">PUBG</option>
+          <option value="3">CSGO</option>
+        </select>
+        <select class="col mx-1 custom-select" id="tipeFilter">
+          <option selected>Type</option>
+          <option value="Public">Public</option>
+          <option value="Private">Private</option>
+        </select>
+        <select class="col mx-1 custom-select" id="fullFilter">
+          <option selected>Availability</option>
+          <option value="Public">All</option>
+          <option value="Private">Not-full Only</option>
+        </select>
+        <input type="text" class="col mx-1 form-control" pattern="[0-9]" id="mmrFilter" placeholder="Minimum MMR">
+      </div>
+    </div>
+    <div class="row-md-12  mt-4 text-center">
+      <div class="col-md-12 mb-3">
+        <button type="button" class="btn btn-dark btn-lg mx-1 p-1">
+          Search
+        </button>
+        <button type="button" class="btn btn-dark btn-lg mr-1 p-1">
+          Create
+        </button>
+      </div>
+    </div>
+  
+    <div class="list-group">
+      {{#if infos}}
+      <div class="card w-75 mx-auto">
+        <div class="card-body">
+          <h5 class="card-title text-center">{{infos}}</h5>
+        </div>
+        <a href="#" class="list-group-item list-group-item-action active">
+          {{infos}}
+        </a>
+        {{else}}
+        {{#each teams}}
+        <div class="card w-75 mx-auto">
+          <div class="card-body">
+            <h5 class="card-title">Team {{this.name}}</h5>
+            <p class="card-text"><samp>{{this}}</samp></p>
+            <a href="#" class="btn btn-primary">Join</a>
+          </div>
+        </div>
+        {{/each}}
+        {{/if}}
+      </div>
+  
+    </div>
+  </body>
+  
+  <script>
+    $(document).ready(function () {
+      console.log($("#gameFilter option:selected"));
+      console.log($("#tipeFilter option:selected"))
+      console.log($("#gameFilter option:selected"))
+      $('input[name="noofppl"]').keyup(function () {
+        console.log($(this).val());
+      });
+    });
+  </script>
+  
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content bg-dark" style="color: white">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Create Team</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: white">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="Teamname">Team Name</label>
+              <input type="text" class="form-control" id="tname" placeholder="Team Name">
+            </div>
+            <label class="radio-inline"><input type="radio" name="optradio"> Public</label>
+            <label class="radio-inline"><input type="radio" name="optradio"> Private</label>
+            <div class="form-group">
+              <label for="exampleFormControlTextarea1">Deskripsi</label>
+              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Deskripsi"></textarea>
+            </div>
+  
+        </div>
+        <div class="modal-footer text-center">
+          <button type="submit" class="btn btn-primary" style="width: 100%">Submit</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  </body>
