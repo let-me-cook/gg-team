@@ -53,13 +53,21 @@ router.post("/teams", (req, res) => {
           captain: req.session.data._id,
           players: [req.session.data._id],
           playerCount: 1
-        }).save((saved, err) => {
+        }).save((err, newTeam) => {
           if (err) console.log(err);
 
-          console.log(saved);
-        });
+          Gamers.findOneAndUpdate(
+            { _id: req.session.data._id },
+            { $push: { teams: newTeam._id } },
+            (updatedGamer, err) => {
+              if (err) console.log(err);
 
-        return res.redirect("/search/teams");
+              console.log(updatedGamer);
+
+              return res.redirect("/search/teams");
+            }
+          );
+        });
       });
     });
   } else {
