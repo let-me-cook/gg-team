@@ -5,7 +5,7 @@ const Gamers = require("../models/Gamers");
 
 router.get("/", (req, res) => {
   if (req.session.isAuthenticated) {
-    return res.redirect("dashboard");
+    return res.redirect("/dashboard");
   } else {
     return res.render("register");
   }
@@ -13,7 +13,7 @@ router.get("/", (req, res) => {
 
 router.post("/", (req, res) => {
   if (req.session.isAuthenticated) {
-    res.redirect("dashboard");
+    res.redirect("/dashboard");
   } else {
     errors = [];
 

@@ -55,7 +55,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // Serve Gamers API Route
-app.use("/api/gamers", require("./routes/api/gamers.js"));
+app.use("/api/teams", require("./routes/api/teams.js"));
 app.use("/", require("./routes/index.js"));
 app.use("/login", require("./routes/login.js"));
 app.use("/register", require("./routes/register.js"));

@@ -1,14 +1,13 @@
 const Schema = require("mongoose").Schema;
 const mongoose = require("mongoose");
 const autoIncrement = require("mongoose-auto-increment");
-const gamersGameSchema = require("./GamersGameSchema");
-const gamersTeamSchema = require("./GamersTeamSchema");
+const gamersGameSchema = require("./SchemaGamersGames");
+const gamersTeamSchema = require("./SchemaGamersTeams");
 const Games = require("./Games");
 
 var teamsSchema = new Schema({
   id: {
-    type: Number,
-    required: true
+    type: Number
   },
   name: {
     type: String,
@@ -27,15 +26,22 @@ var teamsSchema = new Schema({
     required: true,
     ref: "Games"
   },
-  players: [gamersTeamSchema]
+  averageRelevantPoint: {
+    type: Number
+  },
+  players: [gamersTeamSchema],
+  playerCount: {
+    type: Number,
+    default: 0
+  }
 });
-  
+
 teamsSchema.plugin(autoIncrement.plugin, { model: "Teams", field: "id" });
 
 const Teams = mongoose.model("Teams", teamsSchema, "teams");
 
 // Games.findOne({ name: "DOTA 2" }).then((game, err) => {
-  
+
 //   new Teams({
 //     name: "YO I",
 //     tipe: "Public",

@@ -16,24 +16,27 @@ router.post("/", (req, res) => {
 
   Gamers.findOne({ email: req.body.email }).then(gamer => {
     if (!gamer) {
-      errors.push("Email atau Password salah");
+      errors.push("Email atau Password Salah");
+      req.flash("infos", errors);
+
       res.render("login", {
-        infos: errors
+        infos: req.flash("infos")
       });
     } else {
       bcrypt.compare(req.body.password, gamer.password, (err, isMatch) => {
         if (err) throw err;
 
         if (isMatch) {
-          req.session.uname = gamer.uname;
+          req.session._id = gamer._id;
           req.session.isAuthenticated = true;
 
           return res.redirect("/dashboard");
         } else {
-          errors.push("Email atau Password salah");
+          errors.push("Email atau Password Salah");
+          req.flash("infos", errors);
 
           res.render("login", {
-            errors
+            infos: req.flash("infos")
           });
         }
       });

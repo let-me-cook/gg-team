@@ -16,13 +16,13 @@
       </li>
     </ul>
     <ul class="navbar-nav">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Logout</a>
-        </li>
-        {{!-- <li class="nav-item active">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Logout</a>
+      </li>
+      {{!-- <li class="nav-item active">
           <a class="nav-link" href="/faq">FAQ</a>
         </li> --}}
-      </ul>
+    </ul>
     <!-- </div> -->
   </nav>
   {{!-- <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
@@ -48,55 +48,73 @@
   <div class="container">
     <div class="row-md-12">
       <div class="col-md-12 mt-3">
-        <h2 style="text-align: center; color: white">FIND TEAMS</h2>
+        <h2 style="text-align: center; color: white">TEAMS</h2>
       </div>
     </div>
-    <div class="row-md-12">
-      <div class="col-md-12 mt-4">
-        <div class="dropdown text-center">
-          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            #Filters
-          </button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something else here</a>
-          </div>
-        </div>
-      </div>
+    <div class="row">
+      <select class="col mx-1 custom-select" id="gameFilter">
+        <option selected>Games</option>
+        <option value="1">Dota 2</option>
+        <option value="2">PUBG</option>
+        <option value="3">CSGO</option>
+      </select>
+      <select class="col mx-1 custom-select" id="tipeFilter">
+        <option selected>Type</option>
+        <option value="Public">Public</option>
+        <option value="Private">Private</option>
+      </select>
+      <select class="col mx-1 custom-select" id="fullFilter">
+        <option selected>Availability</option>
+        <option value="Public">All</option>
+        <option value="Private">Not-full Only</option>
+      </select>
+      <input type="text" class="col mx-1 form-control" pattern="[0-9]" id="mmrFilter" placeholder="Minimum MMR">
     </div>
-    <div class="row-md-12  mt-4 text-center">
-      <div class="col-md-12">
-        <button type="button" class="btn btn-dark mr-3 p-3" style="border-radius: 50px;">
-          <h3>Search</h3>
-        </button>
-        <button type="button" class="btn btn-dark mr-3 p-3" style="border-radius: 50px;">
-          <h3>Create</h3>
-        </button>
-      </div>
+  </div>
+  <div class="row-md-12  mt-4 text-center">
+    <div class="col-md-12 mb-3">
+      <button type="button" class="btn btn-dark btn-lg mx-1 p-1">
+        Search
+      </button>
+      <button type="button" class="btn btn-dark btn-lg mr-1 p-1">
+        Create
+      </button>
     </div>
+  </div>
 
+  <div class="list-group">
     {{#if infos}}
-    <div class="row mt-5 text-center">
-      <div class="col">
-        <div class="alert alert-primary" role="alert">
-          {{infos}}
+    <div class="card w-75 mx-auto">
+      <div class="card-body">
+        <h5 class="card-title text-center">{{infos}}</h5>
+      </div>
+      <a href="#" class="list-group-item list-group-item-action active">
+        {{infos}}
+      </a>
+      {{else}}
+      {{#each teams}}
+      <div class="card w-75 mx-auto">
+        <div class="card-body">
+          <h5 class="card-title">Team {{this.name}}</h5>
+          <p class="card-text"><samp>{{this}}</samp></p>
+          <a href="#" class="btn btn-primary">Join</a>
         </div>
       </div>
+      {{/each}}
+      {{/if}}
     </div>
-    {{else}}
-    {{#each teams}}
-    <div class="row mt-5 text-center">
-      <div class="col">
-        <button type="button" class="btn btn-dark mr-3" onclick="window.location.href='team.php'"
-          style="border-radius: 50px; padding: 10px 500px 10px 500px;">
-          <h3>{{this}}</h3>
-        </button>
-      </div>
-    </div>
-    {{/each}}
-    {{/if}}
 
   </div>
 </body>
+
+<script>
+  $(document).ready(function () {
+
+    console.log($("#gameFilter option:selected"));
+    console.log($("#tipeFilter option:selected"))
+    console.log($("#gameFilter option:selected"))
+    $('input[name="noofppl"]').keyup(function () {
+      console.log($(this).val());
+    });
+  });
+</script>

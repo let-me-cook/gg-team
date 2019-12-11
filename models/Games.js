@@ -1,8 +1,8 @@
 const Schema = require("mongoose").Schema;
 const mongoose = require("mongoose");
 const autoIncrement = require("mongoose-auto-increment");
-const gamersGameSchema = require("./GamersGameSchema");
-const gamersTeamSchema = require("./GamersTeamSchema");
+const gamersGameSchema = require("./SchemaGamersGames");
+const gamersTeamSchema = require("./SchemaGamersTeams");
 
 var gamesSchema = new Schema({
   id: {
@@ -16,6 +16,9 @@ var gamesSchema = new Schema({
   publisher: {
     type: String,
     required: true
+  },
+  relevantNumber: {
+    type: String
   },
   hasAPI: {
     type: Boolean

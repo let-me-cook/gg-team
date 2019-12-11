@@ -11,7 +11,7 @@ router.get("/", (req, res) => {
   } else {
     req.flash("infos", "Mohon Login Terlebih Dahulu");
     // console.log("dari dash", req.flash("infos"));
-    return res.redirect("login");
+    return res.redirect("/login");
   }
 });
 
@@ -31,7 +31,7 @@ router.get("/findteam", (req, res) => {
       });
     });
   } else {
-    return res.redirect("login");
+    return res.redirect("/login");
   }
 });
 

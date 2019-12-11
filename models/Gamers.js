@@ -1,8 +1,8 @@
 const Schema = require("mongoose").Schema;
 const mongoose = require("mongoose");
 const autoIncrement = require("mongoose-auto-increment");
-const gamersGameSchema = require("./GamersGameSchema");
-const gamersTeamSchema = require("./GamersTeamSchema");
+const gamersGameSchema = require("./SchemaGamersGames");
+const gamersTeamSchema = require("./SchemaGamersTeams");
 
 var gamersSchema = new Schema({
   id: {
@@ -22,7 +22,7 @@ var gamersSchema = new Schema({
   },
   games: [gamersGameSchema],
   teams: [gamersTeamSchema],
-  notification: [String],
+  notifications: [String],
   date_created: {
     type: Date,
     default: Date.now()
