@@ -1,6 +1,12 @@
 const express = require("express");
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  return res.render("debug");
+router.get("/debug1", (req, res) => {
+  return res.render("debug/debug1");
 });
+
+router.get("/debug2", (req, res) => {
+  return res.render("debug/debug2");
+});
+
+module.exports = router;

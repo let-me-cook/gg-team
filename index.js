@@ -61,7 +61,7 @@ app.use("/login", require("./routes/login.js"));
 app.use("/register", require("./routes/register.js"));
 app.use("/dashboard", require("./routes/dashboard.js"));
 app.use("/search", require("./routes/search.js"));
-app.use("/debug", require("./routes/debug.js");
+app.use("/debug", require("./routes/debug.js"));
 
 const PORT = process.env.PORT || 5000;
 
