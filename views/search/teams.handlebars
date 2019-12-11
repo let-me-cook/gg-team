@@ -57,26 +57,23 @@
     <div class="row">
       <select class="col mx-1 custom-select" id="gameFilter">
         <option selected>Games</option>
-        <option value="1">Dota 2</option>
-        <option value="2">PUBG</option>
-        <option value="3">CSGO</option>
+        <option value="DOTA 2">DOTA 2</option>
+        <option value="PUBG">PUBG</option>
+        <option value="CSGO">CSGO</option>
       </select>
       <select class="col mx-1 custom-select" id="tipeFilter">
         <option selected>Type</option>
         <option value="Public">Public</option>
         <option value="Private">Private</option>
       </select>
-      <select class="col mx-1 custom-select" id="fullFilter">
-        <option selected>Availability</option>
-        <option value="Public">All</option>
-        <option value="Private">Not-full Only</option>
-      </select>
-      <input type="text" class="col mx-1 form-control" pattern="[0-9]" id="mmrFilter" placeholder="Minimum MMR">
+      <input type="text" class="col mx-1 form-control" pattern="[0-9]+" id="playerFilter" placeholder="Maximum Player">
+      <input type="text" class="col mx-1 form-control" pattern="[0-9]+" id="mmrFilter"
+        placeholder="Minimum Relevant Rank">
     </div>
   </div>
   <div class="row-md-12  mt-4 text-center">
     <div class="col-md-12 mb-3">
-      <button type="button" class="btn btn-dark btn-lg mx-1 p-1">
+      <button type="button" class="btn btn-dark btn-lg mx-1 p-1" id="search">
         Search
       </button>
       <button type="button" class="btn btn-dark btn-lg mr-1 p-1" data-toggle="modal" data-target="#CreateModal">
@@ -85,7 +82,7 @@
     </div>
   </div>
 
-  <div class="list-group">
+  <div class="list-group" id="teamsData">
     {{#if teams}}
     {{#each teams}}
     <div class="card w-75 mx-auto">
@@ -153,10 +150,6 @@
   </div>
 </body>
 
-<script>
-
-</script>
-
 {{#if infos}}
 <script>
   $(window).on('load', function () {
@@ -164,3 +157,33 @@
   });
 </script>
 {{/if}}
+
+<script>
+  $(window).on('load', function () {
+    $("#search").click(function () {
+      requestJSON = {
+        game: $("#gameFilter option:selected").attr("value"),
+        tipe: $("#tipeFilter option:selected").attr("value"),
+        minPoint: $("#playerFilter").val(),
+        maxPlayer: $("#mmrFilter").val()
+      }
+
+      $.get("/api/teams", requestJSON,
+        (filteredTeams) => {
+          filteredData = "";
+          filteredTeams.forEach(function (team) {
+            filteredData += 
+            `<div class="card w-75 mx-auto">
+              <div class="card-body">
+                <h5 class="card-title">Team ` + team.name + `</h5>
+                <p class="card-text"><samp>` + JSON.stringify(team) + `</samp></p>
+                <a href="#" class="btn btn-primary">Join</a>
+             </div>
+            </div>`
+          })
+
+          $("#teamsData").html(filteredData);
+        });
+    })
+  });
+</script>

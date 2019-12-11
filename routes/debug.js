@@ -9,4 +9,9 @@ router.get("/debug2", (req, res) => {
   return res.render("debug/debug2");
 });
 
+router.get("/debugAlfath", (req, res) => {
+  return res.render("debug/debugAlfath");
+});
+
+
 module.exports = router;

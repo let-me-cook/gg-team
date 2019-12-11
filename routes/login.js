@@ -19,7 +19,7 @@ router.post("/", (req, res) => {
       errors.push("Email atau Password Salah");
       req.flash("infos", errors);
 
-      res.render("index.login", {
+      res.render("index/login", {
         infos: req.flash("infos")
       });
     } else {

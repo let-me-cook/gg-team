@@ -8,19 +8,30 @@ router.get("/", (req, res) => {
     .populate({ path: "game", select: "name partyMAX partyMIN -_id" })
     .populate({ path: "players captain", select: "uname -_id" })
     .then((teams, err) => {
-      teams.filter(team => {
-        return team.game === req.query.game
-          ? req.query.game
-          : team.game && team.tipe === req.query.tipe
-          ? req.query.tipe
-          : team.tipe &&
-            team.totalRelevantPoint / team.playerCount >= req.query.minPoint
-          ? req.query.minPoint
-          : team.averageRelevantPoint && team.playerCount > req.query.maxPlayer
-          ? req.query.maxPlayer
-          : team.playerCount;
-      });
-      res.json(teams);
+      function filterFunction(team) {
+        criteria = {
+          game: req.query.game ? req.query.game : team.game.name,
+          tipe: req.query.tipe ? req.query.tipe : team.tipe,
+          minPoint: req.query.minPoint
+            ? req.query.minPoint
+            : team.totalRelevantPoint / team.playerCount,
+          playerCount: req.query.maxPlayer
+            ? req.query.maxPlayer
+            : team.playerCount
+        };
+
+        truth = {
+          game: team.game.name == criteria.game,
+          tipe: team.game.name == criteria.game,
+          revPoint: team.game.name == criteria.game,
+          playerCount: team.game.name == criteria.game
+        };
+        return truth.game && truth.tipe && truth.revPoint && truth.playerCount;
+      }
+
+      filteredTeam = teams.filter(filterFunction);
+
+      return res.json(filteredTeam);
     });
 });
 
@@ -76,7 +87,7 @@ router.delete("/:id", (req, res) => {
 //   req.query.game ? null : delete req.query["game"];
 //   req.query.tipe ? null : delete req.query["tipe"];
 //   req.query.min
-//     ? (req.query.averageRelevantPoint = { $gt: req.query.min })
+//     ? (req.query.totalRelevantPoint = { $gt: req.query.min })
 //     : null;
 //   req.query.penuh ? (req.query.playerCount = { $lt: req.query.penuh }) : null;
 
