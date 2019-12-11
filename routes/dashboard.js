@@ -15,24 +15,5 @@ router.get("/", (req, res) => {
   }
 });
 
-router.get("/findteam", (req, res) => {
-  if (req.session.isAuthenticated) {
-    Teams.find({}).then((teams, err) => {
-      if (err) throw err;
-
-      if (!teams) {
-        req.flash("infos", "List Team Kosong");
-        return res.render("findteam", {
-          infos: req.flash("infos")
-        });
-      }
-      return res.render("findteam", {
-        teams
-      });
-    });
-  } else {
-    return res.redirect("/login");
-  }
-});
 
 module.exports = router;
