@@ -23,41 +23,41 @@
     <div class="container">
       <div class="row-md-12">
         <div class="col-md-12 mt-3">
-          <h2 class="font-weight-bold"style="text-align: center; color: white;">MY TEAMS</h2>
+          <h2 class="font-weight-bold"style="text-align: center; color: white;">TEAM INFO</h2>
         </div>
       </div>
     </div>
-    <br><br>
-    <div class="container border border-white text-white bg-dark">
-        <div class="row">
-            <div class="col text-left font-weight-bold">
-                <p>#LIST_TEAM</p>
-                <a href="#" class="btn btn-primary">View</a>
+    <br>
+    <div class="container text-white bg-dark">
+        <div class="row text-center">
+            <div class="col">
+                <img src="/img/profile-logo.png" alt="logo-player1" style="width: 20%; margin-top: 15px;">
+                <p>#nama_pemain</p>
+            </div>
+            <div class="col">
+                <img src="/img/profile-logo.png" alt="logo-player1" style="width: 20%; margin-top: 15px;">
+                <p>#nama_pemain</p>
+            </div>
+            <div class="col">
+                <img src="/img/profile-logo.png" alt="logo-player1" style="width: 20%; margin-top: 15px;">
+                <p>#nama_pemain</p>
+            </div>
+            <div class="col">
+                <img src="/img/profile-logo.png" alt="logo-player1" style="width: 20%; margin-top: 15px;">
+                <p>#nama_pemain</p>
+            </div>
+            <div class="col">
+                <img src="/img/profile-logo.png" alt="logo-player1" style="width: 20%; margin-top: 15px;">
+                <p>#nama_pemain</p>
             </div>
         </div>
     </div>
-    <div class="list-group">
-      {{#if infos}}
-      <div class="card w-75 mx-auto">
-        <div class="card-body">
-          <h5 class="card-title text-center">{{infos}}</h5>
+    <br>
+    <div class="container text-center text-white bg-dark">
+        <h3 class="font-weight-bold">Team Message</h3>
+        <div class="col-md">
+          <p class="text-left">#captain_name : #message</p>
         </div>
-        <a href="#" class="list-group-item list-group-item-action active">
-          {{infos}}
-        </a>
-        {{else}}
-        {{#each teams}}
-        <div class="card w-75 mx-auto">
-          <div class="card-body">
-            <h5 class="card-title">Team {{this.name}}</h5>
-            <p class="card-text"><samp>{{this}}</samp></p>
-            <a href="#" class="btn btn-primary">Join</a>
-          </div>
-        </div>
-        {{/each}}
-        {{/if}}
-      </div>
-  
     </div>
   </body>
   
