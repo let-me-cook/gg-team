@@ -6,7 +6,7 @@ const Teams = require("../models/Teams")
 router.get("/", (req, res) => {
   if (req.session.isAuthenticated) {
     return res.render("dashboard", {
-      username: req.session.uname
+      username: req.session.data.uname
     });
   } else {
     req.flash("infos", "Mohon Login Terlebih Dahulu");

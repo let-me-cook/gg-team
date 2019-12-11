@@ -1,8 +1,7 @@
 const Schema = require("mongoose").Schema;
 const mongoose = require("mongoose");
 const autoIncrement = require("mongoose-auto-increment");
-const gamersGameSchema = require("./SchemaGamersGames");
-const gamersTeamSchema = require("./SchemaGamersTeams");
+const Gamers = require("./SchemaGamersGames");
 const Games = require("./Games");
 
 var teamsSchema = new Schema({
@@ -26,10 +25,18 @@ var teamsSchema = new Schema({
     required: true,
     ref: "Games"
   },
-  averageRelevantPoint: {
+  captain: {
+    type: Schema.Types.ObjectId,
+    required: true,
+    ref: "Gamers"
+  },
+  totalRelevantPoint: {
     type: Number
   },
-  players: [gamersTeamSchema],
+  players: [{
+    type: Schema.Types.ObjectId,
+    ref: "Gamers"
+  }],
   playerCount: {
     type: Number,
     default: 0

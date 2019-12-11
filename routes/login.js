@@ -5,9 +5,9 @@ const bcrypt = require("bcryptjs");
 
 router.get("/", (req, res) => {
   if (req.session.isAuthenticated) {
-    return res.redirect("dashboard");
+    return res.redirect("/dashboard");
   } else {
-    return res.render("login", { infos: req.flash("infos") });
+    return res.render("index/login", { infos: req.flash("infos") });
   }
 });
 
@@ -19,7 +19,7 @@ router.post("/", (req, res) => {
       errors.push("Email atau Password Salah");
       req.flash("infos", errors);
 
-      res.render("login", {
+      res.render("index.login", {
         infos: req.flash("infos")
       });
     } else {
@@ -27,7 +27,7 @@ router.post("/", (req, res) => {
         if (err) throw err;
 
         if (isMatch) {
-          req.session._id = gamer._id;
+          req.session.data = gamer;
           req.session.isAuthenticated = true;
 
           return res.redirect("/dashboard");
@@ -35,7 +35,7 @@ router.post("/", (req, res) => {
           errors.push("Email atau Password Salah");
           req.flash("infos", errors);
 
-          res.render("login", {
+          res.render("index/login", {
             infos: req.flash("infos")
           });
         }

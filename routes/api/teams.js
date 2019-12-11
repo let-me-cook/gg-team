@@ -5,14 +5,16 @@ const Games = require("../../models/Games");
 
 router.get("/", (req, res) => {
   Teams.find({})
-    .populate("game")
-    .then(teams => {
+    .populate({ path: "game", select: "name partyMAX partyMIN -_id" })
+    .populate({ path: "players captain", select: "uname -_id" })
+    .then((teams, err) => {
       teams.filter(team => {
         return team.game === req.query.game
           ? req.query.game
           : team.game && team.tipe === req.query.tipe
           ? req.query.tipe
-          : team.tipe && team.averageRelevantPoint >= req.query.minPoint
+          : team.tipe &&
+            team.totalRelevantPoint / team.playerCount >= req.query.minPoint
           ? req.query.minPoint
           : team.averageRelevantPoint && team.playerCount > req.query.maxPlayer
           ? req.query.maxPlayer
@@ -30,32 +32,6 @@ router.get("/:id", (req, res) => {
       res.json(team);
     })
     .catch(err => console.log(err));
-});
-
-router.post("/", (req, res) => {
-  errors = [];
-
-  if (
-    !(
-      req.body.email &&
-      req.body.uname &&
-      req.body.password &&
-      req.body.password2
-    )
-  ) {
-    errors.push("Nama, Tipe, atau Game Tim tidak boleh kosong");
-
-    req.flash("infos", errors);
-
-    return res.render("createteam", {
-      infos: req.flash("infos")
-    });
-  }
-
-  Teams.findOne({ name: req.body.name }).then(team => {
-    if (team) {
-    }
-  });
 });
 
 // Update Gamer by PUT with ID and JSON

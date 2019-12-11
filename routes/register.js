@@ -7,7 +7,7 @@ router.get("/", (req, res) => {
   if (req.session.isAuthenticated) {
     return res.redirect("/dashboard");
   } else {
-    return res.render("register");
+    return res.render("index/register");
   }
 });
 
@@ -29,7 +29,7 @@ router.post("/", (req, res) => {
 
       req.flash("infos", errors);
 
-      return res.render("register", {
+      return res.render("index/register", {
         infos: req.flash("infos")
       });
     }
@@ -52,7 +52,7 @@ router.post("/", (req, res) => {
         if (errors.length !== 0) {
           req.flash("infos", errors);
 
-          return res.render("register", {
+          return res.render("index/register", {
             infos: req.flash("infos")
           });
         }

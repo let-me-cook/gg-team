@@ -79,56 +79,67 @@
       <button type="button" class="btn btn-dark btn-lg mx-1 p-1">
         Search
       </button>
-      <button type="button" class="btn btn-dark btn-lg mr-1 p-1">
+      <button type="button" class="btn btn-dark btn-lg mr-1 p-1" data-toggle="modal" data-target="#CreateModal">
         Create
       </button>
     </div>
   </div>
 
   <div class="list-group">
-    {{#if infos}}
+    {{#if teams}}
+    {{#each teams}}
     <div class="card w-75 mx-auto">
       <div class="card-body">
-        <h5 class="card-title text-center">{{infos}}</h5>
+        <h5 class="card-title">Team {{this.name}}</h5>
+        <p class="card-text"><samp>{{this}}</samp></p>
+        <a href="#" class="btn btn-primary">Join</a>
       </div>
-      <a href="#" class="list-group-item list-group-item-action active">
-        {{infos}}
-      </a>
-      {{else}}
-      {{#each teams}}
-      <div class="card w-75 mx-auto">
-        <div class="card-body">
-          <h5 class="card-title">Team {{this.name}}</h5>
-          <p class="card-text"><samp>{{this}}</samp></p>
-          <a href="#" class="btn btn-primary">Join</a>
-        </div>
-      </div>
-      {{/each}}
-      {{/if}}
     </div>
+    {{/each}}
+    {{else}}
+    <div class="card w-75 mx-auto">
+      <div class="card-body">
+        <p class="card-text"><samp>Team Kosong</samp></p>
+      </div>
+    </div>
+    {{/if}}
+  </div>
   </div>
 
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  <div class="modal fade" id="CreateModal" tabindex="-1" role="dialog" aria-labelledby="CreateModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content bg-dark" style="color: white">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Create Team</h5>
+          <h5 class="modal-title" id="CreateModalLabel">Create Team</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: white">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          <form>
+          <form action="/search/teams" method="POST">
+            {{#each infos}}
+            <div class="alert alert-primary" role="alert">
+              {{this}}
+            </div>
+            {{/each}}
             <div class="form-group">
               <label for="Teamname">Team Name</label>
-              <input type="text" class="form-control" id="tname" placeholder="Team Name">
+              <input type="text" class="form-control" name="teamname" id="teamname" placeholder="Team Name">
             </div>
-            <label class="radio-inline"><input type="radio" name="optradio"> Public</label>
-            <label class="radio-inline"><input type="radio" name="optradio"> Private</label>
+            <label for="tipeDiv">Tipe</label>
+            <div class="form-check" name="tipeDiv">
+              <label class="radio-inline"><input type="radio" name="tipe" value="Public">Public</label>
+              <label class="radio-inline"><input type="radio" name="tipe" value="Private">Private</label>
+            </div>
+            <label for="gameDiv">Games</label>
+            <div class="form-check" name="gameDiv">
+              <label class="radio-inline"><input type="radio" name="game" value="DOTA 2"> DOTA 2</label>
+              <label class="radio-inline"><input type="radio" name="game" value="PUBG"> PUBG</label>
+            </div>
             <div class="form-group">
-              <label for="exampleFormControlTextarea1">Deskripsi</label>
-              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+              <label for="DeskripsiTeam">Deskripsi</label>
+              <textarea class="form-control" id="DeskripsiTeam" name="DeskripsiTeam" rows="3"
                 placeholder="Deskripsi"></textarea>
             </div>
 
@@ -143,12 +154,13 @@
 </body>
 
 <script>
-  $(document).ready(function () {
-    console.log($("#gameFilter option:selected"));
-    console.log($("#tipeFilter option:selected"))
-    console.log($("#gameFilter option:selected"))
-    $('input[name="noofppl"]').keyup(function () {
-      console.log($(this).val());
-    });
+
+</script>
+
+{{#if infos}}
+<script>
+  $(window).on('load', function () {
+    $('#CreateModal').modal('show');
   });
 </script>
+{{/if}}
