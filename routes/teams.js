@@ -15,7 +15,6 @@ router.get("/:id", (req, res) => {
       .then((team, err) => {
         if (err) throw err;
 
-        // return res.send(team)
         return res.render("teams", {
           team,
           infos: req.flash("infos"),
@@ -134,7 +133,7 @@ router.post("/:id/accept/:id_gamer", (req, res) => {
 
             team.players.push(gamer._id);
             team.joinsRequest = team.joinsRequest.filter(gamer => {
-              gamer.id != req.params.id_gamer;
+              return gamer.id != req.params.id_gamer;
             });
             team.playerCount++;
 
@@ -163,7 +162,7 @@ router.post("/:id/decline/:id_gamer", (req, res) => {
 
         if (req.session.data._id == team.captain._id) {
           team.joinsRequest = team.joinsRequest.filter(gamer => {
-            gamer.id != req.params.id_gamer;
+            return gamer.id != req.params.id_gamer;
           });
 
           team.save().then((savedTeam, err) => {
@@ -187,13 +186,15 @@ router.post("/:id/kick/:id_gamer", (req, res) => {
 
         if (req.session.data._id == team.captain._id) {
           team.players = team.players.filter(gamer => {
-            gamer.id != req.params.id_gamer;
+            return gamer.id != req.params.id_gamer;
           });
-          team.playerCount--;
+
+          team.playerCount = team.players.length;
 
           team.save().then((savedTeam, err) => {
             if (err) throw err;
 
+            console.log(savedTeam);
             return res.redirect("/teams/" + req.params.id);
           });
         }

@@ -31,7 +31,8 @@ var teamsSchema = new Schema({
     ref: "Gamers"
   },
   totalRelevantPoint: {
-    type: Number
+    type: Number,
+    default: 0
   },
   players: [
     {
