@@ -13,5 +13,10 @@ router.get("/faq", (req, res) => {
   res.render("index/faq");
 });
 
+router.get("/logout", (req, res) => {
+  req.session.destroy;
+  
+  res.redirect("/login")
+})
 
 module.exports = router;
