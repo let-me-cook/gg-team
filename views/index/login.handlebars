@@ -10,7 +10,8 @@
     }
   </style>
 
-<body style="background-color: #737373">
+{{!-- background-color: #737373 --}}
+<body style="background-color: #737373";>
   <div class="container-fluid">
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
       <ul class="navbar-nav mr-auto">
@@ -39,8 +40,8 @@
   </div>
 
   <div class="row mt-5">
-    <div class="col-md-6 m-auto">
-      <div class="card card-body">
+    <div class="col-md-3 m-auto">
+      <div class="card card-body" style="margin-top: 100px;">
         <h1 class="text-center mb-3">Login</h1>
         {{#if infos}}
         {{#each infos}}
@@ -52,14 +53,14 @@
         <form action="./login" method="POST">
           <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" id="email" name="email" class="form-control" placeholder="Enter Email" />
+            <input type="email" id="email" name="email" class="form-control" placeholder="Enter Your Email" />
           </div>
           <div class="form-group">
             <label for="password">Password</label>
-            <input type="text" id="password" name="password" class="form-control" placeholder="Enter Password"
+            <input type="password" id="password" name="password" class="form-control" placeholder="Enter Password"
               minlength="5" />
           </div>
-          <button type="submit" class="btn btn-primary btn-block">Login</button>
+          <button type="submit" class="btn btn-primary btn-block" style="margin-top: 30px;">Login</button>
         </form>
       </div>
     </div>
