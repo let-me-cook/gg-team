@@ -8,13 +8,14 @@ router.get("/teams", (req, res) => {
   if (req.session.isAuthenticated) {
     Teams.find({})
       .populate({ path: "game", select: "name partyMAX partyMIN -_id" })
-      .populate({ path: "players captain", select: "uname -_id" })
+      .populate({ path: "players captain joinsRequest", select: "uname -_id" })
       .then((teams, err) => {
         if (err) throw err;
 
         return res.render("search/teams", {
           teams,
-          infos: req.flash("infos")
+          infos: req.flash("infos"),
+          modal_infos: req.flash("modal_infos")
         });
       });
   } else {
@@ -29,7 +30,7 @@ router.post("/teams", (req, res) => {
     if (!(req.body.teamname && req.body.tipe && req.body.game)) {
       errors.push("Nama, Tipe, atau Game Tim tidak boleh kosong");
 
-      req.flash("infos", errors);
+      req.flash("modal_infos", errors);
 
       return res.redirect("/search/teams");
     }
@@ -40,7 +41,7 @@ router.post("/teams", (req, res) => {
       console.log(req.body);
 
       if (team) {
-        req.flash("infos", "Nama Team Sudah Ada");
+        req.flash("modal_infos", "Nama Team Sudah Ada");
         return res.redirect("/search/teams");
       }
 
@@ -56,17 +57,19 @@ router.post("/teams", (req, res) => {
         }).save((err, newTeam) => {
           if (err) console.log(err);
 
-          Gamers.findOneAndUpdate(
-            { _id: req.session.data._id },
-            { $push: { teams: newTeam._id } },
-            (updatedGamer, err) => {
-              if (err) console.log(err);
+          Gamers.findById(req.session.data._id).then((gamer, err) => {
+            if (err) throw err;
 
-              console.log(updatedGamer);
+            gamer.teams.push({ team: newTeam._id, role: "Captain" });
+
+            gamer.save().then((savedGamer, err) => {
+              if (err) throw err;
+
+              req.flash("infos", "Pembuatan tim sukses");
 
               return res.redirect("/search/teams");
-            }
-          );
+            });
+          });
         });
       });
     });

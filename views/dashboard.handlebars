@@ -3,6 +3,7 @@
     background-color: black;
   }
 </style>
+
 <body style="background-color: #737373">
   <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
     <a class="navbar-brand" href="/dashboard">
@@ -20,21 +21,19 @@
       <li class="nav-item active">
         <a class="nav-link" href="/debug/debug1">MyTeams</a>
       </li>
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Logout</a>
-        </li>
-        {{!-- <li class="nav-item active">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Logout</a>
+      </li>
+      {{!-- <li class="nav-item active">
           <a class="nav-link" href="/faq">FAQ</a>
         </li> --}}
-      </ul>
+    </ul>
     <!-- </div> -->
   </nav>
   <br><br><br>
-  {{#if username}}
   <center>
-    <h3 class="text-white font-weight-bold">SALAM SEJAHTERA {{username}}</h3>
+    <h3 class="text-white font-weight-bold">SALAM SEJAHTERA {{gamer.uname}}</h3>
   </center>
-  {{/if}}
   <br>
   <div class="container border border-white text-white bg-dark">
     <div class="row">
@@ -43,13 +42,13 @@
         <p>LIST</p>
       </div>
       <div class="col">
-        <a href="#">
-          <img id="logo-dota"src="/img/dota2.png" alt="dotka2" style="width: 20%;">
+        <a href="#" data-toggle="modal" data-target="#DOTA2">
+          <img id="logo-dota" src="/img/dota2.png" alt="dota2" style="width: 20%;">
         </a>
       </div>
       <div class="col">
-        <a href="#">
-          <img id="logo-pubg"src="/img/pubg.png" alt="pabji" style="width: 20%;">
+        <a href="#" data-toggle="modal" data-target="#PUBG">
+          <img id="logo-pubg" src="/img/pubg.png" alt="pubg" style="width: 20%;">
         </a>
       </div>
     </div>
@@ -60,25 +59,39 @@
       <div class="col-md-4 bg-dark" style="margin-left: 15px; padding: 0%;">
         <p></p>
         <img src="/img/profile-logo.png" alt="just-logo" style="width: 10%;">
-        <h3>#player_name</h3>
-        <p>#rank_player</p>
-        <p>_____________________________________________</p>
-        <div class="w-100"></div>
-        <h4>Joined Team</h3>
+        <h3>{{gamer.uname}}</h3>
+        {{#each gamer.games}}
         <div class="row">
           <div class="col-md">
-            <p>#nama_team</p>
+            <p>{{this.game.name}}</p>
           </div>
           <div class="col-md ml-auto">
-            <p>#role_team</p>
+            <p>{{this.relevantPoint}}</p>
           </div>
         </div>
+        {{/each}}
+        <p>_____________________________________________</p>
+        <div class="w-100"></div>
+        {{#each gamer.teams}}
+        <div class="row">
+          <div class="col-md">
+            <p>{{this.team.name}}</p>
+          </div>
+          <div class="col-md ml-auto">
+            <p>{{this.role}}</p>
+          </div>
+        </div>
+        {{/each}}
       </div>
       <div class="col-md-7 ml-auto bg-dark" style="margin-right: 15px;">
         <h3 class="font-weight-bold">Team Message</h3>
+        {{#each gamer.teams}}
+        {{#each this.team.messages}}
         <div class="col-md">
-          <p class="text-left">#captain_name : #message</p>
+          <p class="text-left">{{this}}</p>
         </div>
+        {{/each}}
+        {{/each}}
         {{!-- <div class="col-md" style="background-color: black;">
           <div class="row">
             <div class="col-md">
@@ -98,3 +111,63 @@
     <h3 class="font-weight-bold">AGENDA</h3>
   </div>
 </body>
+
+<div class="modal fade" id="DOTA2" tabindex="-1" role="dialog" aria-labelledby="DOTA2Label" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content bg-dark" style="color: white">
+      <div class="modal-header">
+        <h5 class="modal-title" id="DOTA2Label">Dota 2</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: white">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <form action="/dashboard/DOTA 2" method="POST">
+          <div class="form-group">
+            <label for="revPoint">Relevant Points</label>
+            <input type="text" class="form-control" name="revPoint" id="revPoint" placeholder="e.g. 3000">
+          </div>
+          <div class="form-group">
+            <label for="revLink">Relevant Link</label>
+            <input type="text" class="form-control" name="revLink" id="revLink"
+              placeholder="e.g. https://steamcommunity.com/id/falth322/">
+          </div>
+      </div>
+      <div class="modal-footer text-center">
+        <button type="submit" class="btn btn-primary" style="width: 100%">Update DOTA 2 Data</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="PUBG" tabindex="-1" role="dialog" aria-labelledby="PUBGLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content bg-dark" style="color: white">
+      <div class="modal-header">
+        <h5 class="modal-title" id="PUBGLabel">PUBG</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: white">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <form action="/dashboard/PUBG" method="POST">
+          <div class="form-group">
+            <label for="revPoint">Relevant Points</label>
+            <input type="text" class="form-control" name="revPoint" id="revPoint" placeholder="e.g. 300">
+          </div>
+          <div class="form-group">
+            <label for="revLink">Relevant Link</label>
+            <input type="text" class="form-control" name="revLink" id="revLink"
+              placeholder="e.g. https://steamcommunity.com/id/falth322/">
+          </div>
+      </div>
+      <div class="modal-footer text-center">
+        <button type="submit" class="btn btn-primary" style="width: 100%">Update PUBG Data</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>

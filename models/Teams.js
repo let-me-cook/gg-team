@@ -33,14 +33,23 @@ var teamsSchema = new Schema({
   totalRelevantPoint: {
     type: Number
   },
-  players: [{
-    type: Schema.Types.ObjectId,
-    ref: "Gamers"
-  }],
+  players: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Gamers"
+    }
+  ],
   playerCount: {
     type: Number,
     default: 0
-  }
+  },
+  messages: [String],
+  joinsRequest: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Gamers"
+    }
+  ]
 });
 
 teamsSchema.plugin(autoIncrement.plugin, { model: "Teams", field: "id" });

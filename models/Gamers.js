@@ -20,11 +20,32 @@ var gamersSchema = new Schema({
     type: String,
     required: true
   },
-  games: [gamersGameSchema],
+  games: [
+    {
+      game: {
+        type: Schema.Types.ObjectId,
+        ref: "Games"
+      },
+      relevantPoint: {
+        type: Number
+      },
+      relevantLink: {
+        type: String
+      },
+      isset: {
+        type: Boolean
+      }
+    }
+  ],
   teams: [
     {
-      type: Schema.Types.ObjectId,
-      ref: "Teams"
+      team: {
+        type: Schema.Types.ObjectId,
+        ref: "Teams"
+      },
+      role: {
+        type: String
+      }
     }
   ],
   notifications: [String],

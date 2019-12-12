@@ -54,7 +54,7 @@
         <h2 style="text-align: center; color: white">TEAMS</h2>
       </div>
     </div>
-    <div class="row">
+    <div class="row  w-75 mx-auto my-1">
       <select class="col mx-1 custom-select" id="gameFilter">
         <option selected>Games</option>
         <option value="DOTA 2">DOTA 2</option>
@@ -66,8 +66,9 @@
         <option value="Public">Public</option>
         <option value="Private">Private</option>
       </select>
-      <input type="text" class="col mx-1 form-control" pattern="[0-9]+" id="playerFilter" placeholder="Maximum Player">
-      <input type="text" class="col mx-1 form-control" pattern="[0-9]+" id="mmrFilter"
+      <input type="text" class="col-4 mx-1 form-control" pattern="[0-9]+" id="playerFilter"
+        placeholder="Maximum Player">
+      <input type="text" class="col-4 mx-1 form-control" pattern="[0-9]+" id="mmrFilter"
         placeholder="Minimum Relevant Rank">
     </div>
   </div>
@@ -82,19 +83,28 @@
     </div>
   </div>
 
+
+  {{#each infos}}
+  <div class="alert alert-primary w-75 mx-auto my-1" role="alert">
+    {{this}}
+  </div>
+  {{/each}}
   <div class="list-group" id="teamsData">
     {{#if teams}}
     {{#each teams}}
-    <div class="card w-75 mx-auto">
+    <div class="card w-75 mx-auto my-1">
       <div class="card-body">
         <h5 class="card-title">Team {{this.name}}</h5>
         <p class="card-text"><samp>{{this}}</samp></p>
-        <a href="#" class="btn btn-primary">Join</a>
+        <form action="/teams/{{this.id}}/join" method="post">
+          <button type="submit" class="btn btn-primary">Join</button>
+          <a href="/teams/{{this.id}}/" class="btn btn-primary">Lihat</a>
+        </form>
       </div>
     </div>
     {{/each}}
     {{else}}
-    <div class="card w-75 mx-auto">
+    <div class="card w-75 mx-auto my-1">
       <div class="card-body">
         <p class="card-text"><samp>Team Kosong</samp></p>
       </div>
@@ -115,7 +125,7 @@
         </div>
         <div class="modal-body">
           <form action="/search/teams" method="POST">
-            {{#each infos}}
+            {{#each modal_infos}}
             <div class="alert alert-primary" role="alert">
               {{this}}
             </div>
@@ -139,7 +149,6 @@
               <textarea class="form-control" id="DeskripsiTeam" name="DeskripsiTeam" rows="3"
                 placeholder="Deskripsi"></textarea>
             </div>
-
         </div>
         <div class="modal-footer text-center">
           <button type="submit" class="btn btn-primary" style="width: 100%">Submit</button>
@@ -150,7 +159,7 @@
   </div>
 </body>
 
-{{#if infos}}
+{{#if modal_infos}}
 <script>
   $(window).on('load', function () {
     $('#CreateModal').modal('show');
@@ -172,13 +181,16 @@
         (filteredTeams) => {
           filteredData = "";
           filteredTeams.forEach(function (team) {
-            filteredData += 
-            `<div class="card w-75 mx-auto">
+            filteredData +=
+              `<div class="card w-75 mx-auto my-1">
               <div class="card-body">
                 <h5 class="card-title">Team ` + team.name + `</h5>
                 <p class="card-text"><samp>` + JSON.stringify(team) + `</samp></p>
-                <a href="#" class="btn btn-primary">Join</a>
-             </div>
+                <form action="/teams/`+ team.id + `/join" method="post">
+                  <button type="submit" class="btn btn-primary">Join</button>
+                  <a href="/teams/` + this.id + `/" class="btn btn-primary">Lihat</a>
+                </form>
+              </div>
             </div>`
           })
 

@@ -1,0 +1,97 @@
+<body style="background-color: #737373">
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <a class="navbar-brand" href="/dashboard">
+      <img src="/img/logowhite.png" alt="logo">
+    </a>
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/search/teams">Find Team</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/dashboard">Dashboard</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">MyTeams</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Logout</a>
+      </li>
+    </ul>
+  </nav>
+  <div class="container">
+    <div class="row-md-12">
+      <div class="col-md-12 mt-3">
+        <h2 class="font-weight-bold" style="text-align: center; color: white;">TEAM INFO</h2>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="container text-white bg-dark">
+    <div class="row text-center justify-content-md-center">
+      {{#with team}}
+      {{#each players}}
+      <div class="col-2 ">
+        <img src="/img/profile-logo.png" alt="logo-player1" style="width: 20%; margin-top: 15px;">
+        <p>{{this.uname}}</p>
+        
+        {{isCaptain}}
+        <form action="/teams/{{id}}/kick/{{this.id}}" method="POST">
+          <input type="submit" class="btn btn-primary" value="Kick">
+        </form>
+        
+      </div>
+      {{/each}}
+      {{/with}}
+    </div>
+  </div>
+  <br>
+  <div class="container text-center text-white bg-dark">
+    <h3 class="font-weight-bold">Team Message</h3>
+    {{#each team.messages}}
+    <div class="col-md">
+      <p class="text-left">{{this}}</p>
+    </div>
+    {{/each}}
+  </div>
+  <br>
+  {{#if isCaptain}}
+  <div class="container text-right text-white">
+    <div class="row">
+      <div class="col">
+        <form action="/teams/{{team.id}}/message" method="POST">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Masukkan Pesan" id="message" name="message">
+            <div class="input-group-btn">
+              <button type="submit" class="btn btn-primary">Send</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <br><br><br>
+  <div class="container text-center text-white">
+    <h3 class="font-weight-bold">Member Request</h3>
+    <div class="row bg-dark" style="margin-left: 0px; margin-right: 0px;">
+      {{#each team.joinsRequest}}
+      <div class="col-md">
+        <p class="text-left" style="margin-top: 8px; margin-bottom: 8px;">{{this.uname}}</p>
+      </div>
+      <div class="col-md text-right">
+        <div class="row ">
+
+          <form action="/teams/{{../team.id}}/accept/{{this.id}}" method="POST">
+            <input type="submit" class="btn btn-primary" value="Accept">
+          </form>
+          <form action="/teams/{{../team.id}}/decline/{{this.id}}" method="POST">
+            <input type="submit" class="btn btn-primary" value="Decline">
+          </form>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+  </div>
+  {{/if}}
+</body>
