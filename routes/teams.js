@@ -26,6 +26,30 @@ router.get("/:id", (req, res) => {
   }
 });
 
+router.get("/", (req, res) => {
+  if (req.session.isAuthenticated) {
+    Gamers.findById(req.session.data._id)
+      .populate({
+        path: "teams.team",
+        populate: {
+          path: "game"
+        }
+      })
+      .then((gamer, err) => {
+        if (err) throw err;
+
+        // return res.send(gamer.teams);
+        return res.render("myteams", {
+          teams: gamer.teams
+        });
+      });
+  } else {
+    req.flash("infos", "Mohon Login Terlebih Dahulu");
+    // console.log("dari dash", req.flash("infos"));
+    return res.redirect("/login");
+  }
+});
+
 router.post("/:id/join", (req, res) => {
   if (req.session.isAuthenticated) {
     Teams.findOne({ id: req.params.id })
@@ -55,7 +79,10 @@ router.post("/:id/join", (req, res) => {
               return player._id == req.session.data._id;
             })
           ) {
-            req.flash("infos", "Anda sudah melakukan request masuk pada tim ini");
+            req.flash(
+              "infos",
+              "Anda sudah melakukan request masuk pada tim ini"
+            );
 
             return res.redirect("/search/teams");
           }
@@ -90,6 +117,49 @@ router.post("/:id/join", (req, res) => {
             });
           });
         }
+      })
+      .catch(err => {
+        if (err) throw err;
+      });
+  } else {
+    return res.redirect("/login");
+  }
+});
+
+router.post("/:id/leave", (req, res) => {
+  if (req.session.isAuthenticated) {
+    Teams.findOne({ id: req.params.id })
+      .populate({ path: "game", select: "name partyMAX partyMIN -_id" })
+      .populate({ path: "players captain", select: "uname _id" })
+      .then((team, err) => {
+        if (err) throw err;
+
+        if (
+          team.players.some(player => {
+            return player.id == req.params.id;
+          })
+        ) {
+          req.flash("infos", "Anda bukan anggota tim ini");
+
+          req.redirect("/search/teams");
+        }
+
+        team.players = team.players.filter(gamer => {
+          return gamer.id != req.params.id_gamer;
+        });
+
+        team.playerCount = team.players.length;
+
+        team.save().then((savedTeam, err) => {
+          if (err) throw err;
+
+          req.flash("infos", "Anda telah keluar dari grup");
+
+          return res.redirect("/search/team");
+        });
+      })
+      .catch(err => {
+        if (err) throw err;
       });
   } else {
     return res.redirect("/login");
@@ -114,6 +184,9 @@ router.post("/:id/message", (req, res) => {
 
           return res.redirect("/teams/" + req.params.id);
         });
+      })
+      .catch(err => {
+        if (err) throw err;
       });
   } else {
     return res.redirect("/login");
@@ -133,20 +206,22 @@ router.post("/:id/accept/:id_gamer", (req, res) => {
 
             team.players.push(gamer._id);
             team.joinsRequest = team.joinsRequest.filter(gamer => {
-              return gamer.id != req.params.id_gamer;
+              return gamer.id == req.params.id_gamer;
             });
             team.playerCount++;
 
             team.save().then((savedTeam, err) => {
               if (err) throw err;
 
-              
               gamer.teams.push({ team: savedTeam._id, role: "Anggota" });
 
               return res.redirect("/teams/" + req.params.id);
             });
           });
         }
+      })
+      .catch(err => {
+        if (err) throw err;
       });
   } else {
     return res.redirect("/login");
@@ -171,6 +246,9 @@ router.post("/:id/decline/:id_gamer", (req, res) => {
             return res.redirect("/teams/" + req.params.id);
           });
         }
+      })
+      .catch(err => {
+        if (err) throw err;
       });
   } else {
     return res.redirect("/login");
@@ -198,6 +276,9 @@ router.post("/:id/kick/:id_gamer", (req, res) => {
             return res.redirect("/teams/" + req.params.id);
           });
         }
+      })
+      .catch(err => {
+        if (err) throw err;
       });
   } else {
     return res.redirect("/login");

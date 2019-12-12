@@ -32,6 +32,9 @@ router.get("/", (req, res) => {
       filteredTeam = teams.filter(filterFunction);
 
       return res.json(filteredTeam);
+    })
+    .catch(err => {
+      if (err) throw err;
     });
 });
 
@@ -42,7 +45,9 @@ router.get("/:id", (req, res) => {
     .then(team => {
       res.json(team);
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+      if (err) throw err;
+    });
 });
 
 // Update Gamer by PUT with ID and JSON

@@ -17,7 +17,7 @@
     </ul>
     <ul class="navbar-nav">
       <li class="nav-item active">
-        <a class="nav-link" href="/myteams">MyTeams</a>
+        <a class="nav-link" href="/teams">MyTeams</a>
       </li>
       <li class="nav-item active">
         <a class="nav-link" href="/logout">Logout</a>
@@ -91,7 +91,12 @@
     <div class="card w-75 mx-auto my-1">
       <div class="card-body">
         <h5 class="card-title">Team {{this.name}}</h5>
-        <p class="card-text"><samp>{{this}}</samp></p>
+        <p class="card-text">Game {{this.game.name}}</p>
+        <p class="card-text">Captain {{this.captain.uname}}</p>
+        <p class="card-text">Tipe {{this.tipe}}</p>
+        {{#if this.description}}
+        <p class="card-text">Deskripsi : {{this.description}}</p>
+        {{/if}}
         <form action="/teams/{{this.id}}/join" method="post">
           <button type="submit" class="btn btn-primary">Join</button>
           <a href="/teams/{{this.id}}/" class="btn btn-primary">Lihat</a>
@@ -177,16 +182,21 @@
         (filteredTeams) => {
           filteredData = "";
           filteredTeams.forEach(function (team) {
+            team.description == undefined ? team.description = "" : team.description = `<p class="card-text">Deskripsi : ${team.description}</p>`
+
             filteredData +=
-              `<div class="card w-75 mx-auto my-1">
-              <div class="card-body">
-                <h5 class="card-title">Team ` + team.name + `</h5>
-                <p class="card-text"><samp>` + JSON.stringify(team) + `</samp></p>
-                <form action="/teams/`+ team.id + `/join" method="post">
-                  <button type="submit" class="btn btn-primary">Join</button>
-                  <a href="/teams/` + this.id + `/" class="btn btn-primary">Lihat</a>
-                </form>
-              </div>
+            `
+            <div class="card w-75 mx-auto my-1">
+            <div class="card-body">
+            <h5 class="card-title">Team ${team.name}</h5>
+            <p class="card-text">Game ${team.game.name}</p>
+            <p class="card-text">Captain ${team.captain.uname}</p>
+            <p class="card-text">Tipe ${team.tipe}</p>
+            <form action="/teams/${team.id}/join" method="post">
+            <button type="submit" class="btn btn-primary">Join</button>
+            <a href="/teams/${team.id}/" class="btn btn-primary">Lihat</a>
+            </form>
+            </div>
             </div>`
           })
 
